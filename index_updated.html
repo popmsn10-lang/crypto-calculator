@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Crypto Staking Calculator</title>
+<style>
+body{margin:0;background:#0b1220;font-family:Arial,sans-serif;color:#fff}
+.wrap{max-width:420px;margin:20px auto;padding:16px}
+.card{background:#1b2436;border-radius:20px;padding:20px}
+h2{text-align:center;color:#66b7ff}
+label{display:block;margin:12px 0 6px}
+input,select{width:100%;padding:12px;font-size:18px;border-radius:10px;border:none;box-sizing:border-box}
+.row{display:flex;justify-content:space-between;padding:8px 0;border-bottom:1px solid #334155}
+.value{color:#6ef3a5;font-weight:bold}
+.box{background:#111827;border-radius:16px;padding:14px;margin-top:18px}
+</style>
+</head>
+<body>
+<div class="wrap"><div class="card">
+<h2>Crypto Staking Calculator</h2>
+
+<label>Principal</label>
+<input id="amount" type="number" value="1000">
+
+
+<label>Asset</label>
+<select id="asset">
+<option>USDT</option>
+<option>SOL</option>
+<option>WLFI</option>
+<option>GRASS</option>
+</select>
+
+
+<label>APR (%)</label>
+<input id="apr" type="number" value="9">
+
+<div class="box">
+<div class="row"><span>Minute</span><span id="minute" class="value"></span></div>
+<div class="row"><span>Hour</span><span id="hour" class="value"></span></div>
+<div class="row"><span>Day</span><span id="day" class="value"></span></div>
+<div class="row"><span>Week</span><span id="week" class="value"></span></div>
+<div class="row"><span>Month</span><span id="month" class="value"></span></div>
+<div class="row"><span>Year</span><span id="year" class="value"></span></div>
+<div class="row"><span>Total</span><span id="total" class="value"></span></div>
+</div>
+
+</div></div>
+<script>
+function calc(){
+const a=Number(document.getElementById('amount').value)||0;
+const r=Number(document.getElementById('apr').value)||0;
+const y=a*r/100;
+document.getElementById('year').textContent=y.toFixed(2);
+document.getElementById('month').textContent=(y/12).toFixed(2);
+document.getElementById('week').textContent=(y/52).toFixed(2);
+document.getElementById('day').textContent=(y/365).toFixed(4);
+document.getElementById('hour').textContent=(y/365/24).toFixed(6);
+document.getElementById('minute').textContent=(y/365/24/60).toFixed(8);
+document.getElementById('total').textContent=(a+y).toFixed(2);
+}
+document.getElementById('amount').addEventListener('input',calc);
+document.getElementById('apr').addEventListener('input',calc);
+calc();
+</script>
+</body>
+</html>
